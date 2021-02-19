@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace FavourPal.Api.Migrations
 {
-    [DbContext(typeof(EFDataContext))]
+    [DbContext(typeof(Models.FavourPalDbContext))]
     partial class EFDataContextModelSnapshot : ModelSnapshot
     {
         protected override void BuildModel(ModelBuilder modelBuilder)

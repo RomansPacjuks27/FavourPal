@@ -15,8 +15,6 @@ namespace FavourPal.Models
         public string Email { get; set; }
 
         [Required(ErrorMessage = "Amount is required!")]
-        [DataType(DataType.Currency)]
-        [Range(0.01, 10000000)]
-        public double Amount { get; set; }
+        public decimal Amount { get; set; }
     }
 }

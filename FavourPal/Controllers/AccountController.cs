@@ -11,21 +11,24 @@ using Microsoft.AspNetCore.Authentication.Cookies;
 using FavourPal.Models;
 using FavourPal.Api.Models;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
+using FavourPal.Api.Interfaces;
 
 namespace FavourPal.Controllers
 {
     [Authorize]
     public class AccountController : Controller
     {
-        public readonly EFDataContext dbContext = new EFDataContext();
+        //public readonly EFDataContext dbContext = new EFDataContext();
 
         private SignInManager<User> signInManager { get; set; }
         private UserManager<User> userInManager { get; set; }
+        private readonly IAccountService accountService;
 
-        public AccountController (SignInManager<User> _signInManager, UserManager<User> _userManager)
+        public AccountController (SignInManager<User> _signInManager, UserManager<User> _userManager, IAccountService _accountService)
         {
             this.signInManager = _signInManager;
             this.userInManager = _userManager;
+            this.accountService = _accountService;
         }
 
         [AllowAnonymous]
@@ -78,7 +81,7 @@ namespace FavourPal.Controllers
                     Email = model.Email,
                     UserName = model.Email,
                     PasswordHash = model.Password,
-                    Balance = 400  
+                    Balance = new Balance(400)
                 };
 
                 var result = await userInManager.CreateAsync(user, model.Password);
@@ -107,36 +110,7 @@ namespace FavourPal.Controllers
 
         public ActionResult ViewBalance()
         {
-            User currentUser = dbContext._Users.Where(x => x.UserName == User.Identity.Name).First();
-            
-            var userOwed = (from x in dbContext._TakenDebts join
-                            y in dbContext._Requests on
-                            x.RequestId equals y.RequestId where 
-                            y.RequestFromUser == currentUser.Id && 
-                            y.Accepted == true &&
-                            !dbContext._ReturnedDebts.Any(a => a.RequestId == y.RequestId)
-                            select new
-                            {
-                                x.Amount
-                            }).ToList().Sum(x => (double)x.Amount);
-
-            var userlent = (from x in dbContext._TakenDebts join
-                            y in dbContext._Requests on
-                            x.RequestId equals y.RequestId where
-                            y.RequestToUser == currentUser.Id && 
-                            y.Accepted == true &&
-                            !dbContext._ReturnedDebts.Any(a => a.RequestId == y.RequestId)
-                            select new
-                            {
-                                x.Amount
-                            }).ToList().Sum(z => (double)z.Amount);
-
-            BalanceViewModel model = new BalanceViewModel()
-            {
-                Owed = userOwed,
-                Lent = userlent,
-                Balance = (double)currentUser.Balance 
-            };
+            var model = accountService.GetBalance();
 
             return View(model);
         }

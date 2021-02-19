@@ -49,11 +49,11 @@ namespace FavourPal
                 option.MinimumSameSitePolicy = SameSiteMode.None;
             });
 
-            services.AddDbContext<EFDataContext>(option =>
+            services.AddDbContext<Api.Models.FavourPalDbContext>(option =>
                 option.UseSqlServer(
                     Configuration.GetConnectionString("DefaultConnection")));
             services.AddIdentity<Users, IdentityRole>()
-                .AddEntityFrameworkStores<EFDataContext>();
+                .AddEntityFrameworkStores<Api.Models.FavourPalDbContext>();
             //services.AddControllersWithViews().AddRazorRuntimeCompilation();
 
             MvcOptions options = new MvcOptions();

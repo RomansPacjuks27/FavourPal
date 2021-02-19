@@ -9,7 +9,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace FavourPal.Api.Migrations
 {
-    [DbContext(typeof(EFDataContext))]
+    [DbContext(typeof(Models.FavourPalDbContext))]
     [Migration("20191006231904_Added relation between Requests and DebtReturned")]
     partial class AddedrelationbetweenRequestsandDebtReturned
     {

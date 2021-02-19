@@ -9,7 +9,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace FavourPal.Api.Migrations
 {
-    [DbContext(typeof(EFDataContext))]
+    [DbContext(typeof(Models.FavourPalDbContext))]
     [Migration("20191015230015_Recreate db")]
     partial class Recreatedb
     {

@@ -18,10 +18,11 @@ namespace FavourPal.Api.Models
         [Column(TypeName = "varchar(255)")]
         public string LastName { get; set; }
 
-        [Column(TypeName = "decimal(10, 2)")]
-        public decimal Balance { get; set; }
+        //[Column(TypeName = "decimal(10, 2)")]
+        //public decimal Balance { get; set; }
+        public virtual Balance Balance { get; set; }
         
-        public List<Transfer> Transfers { get; set; }
+        public virtual ICollection<Transfer> Transfers { get; set; }
 
         public virtual ICollection<Request> RequestsFrom { get; set; }
         public virtual ICollection<Request> RequestsTo { get; set; }

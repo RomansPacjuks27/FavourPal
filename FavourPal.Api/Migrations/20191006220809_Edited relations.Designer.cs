@@ -9,7 +9,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace FavourPal.Api.Migrations
 {
-    [DbContext(typeof(EFDataContext))]
+    [DbContext(typeof(Models.FavourPalDbContext))]
     [Migration("20191006220809_Edited relations")]
     partial class Editedrelations
     {

@@ -12,7 +12,7 @@ namespace FavourPal.Controllers
     [Authorize]
     public class DebtController : Controller
     {
-        public readonly EFDataContext dbContext = new EFDataContext();
+        public readonly FavourPalDbContext dbContext = new FavourPalDbContext();
 
         public IActionResult Index()
         {

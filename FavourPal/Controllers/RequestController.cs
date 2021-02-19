@@ -10,8 +10,6 @@ namespace FavourPal.Controllers
     [Authorize]
     public class RequestController : Controller
     {
-        public readonly EFDataContext dbContext = new EFDataContext();
-
         public IActionResult Index()
         {
             return RedirectToAction("Index", "Home");
