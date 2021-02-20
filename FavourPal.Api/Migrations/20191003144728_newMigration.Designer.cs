@@ -255,7 +255,7 @@ namespace FavourPal.Api.Migrations
                     b.ToTable("AspNetUserTokens");
                 });
 
-            modelBuilder.Entity("FavourPal.Api.Models._Users", b =>
+            modelBuilder.Entity("FavourPal.Api.Models.Users", b =>
                 {
                     b.HasBaseType("Microsoft.AspNetCore.Identity.IdentityUser");
 
@@ -276,16 +276,16 @@ namespace FavourPal.Api.Migrations
 
                     b.ToTable("Users","dbo");
 
-                    b.HasDiscriminator().HasValue("_Users");
+                    b.HasDiscriminator().HasValue("Users");
                 });
 
             modelBuilder.Entity("FavourPal.Api.Models.Requests", b =>
                 {
-                    b.HasOne("FavourPal.Api.Models._Users", "RequestFrom")
+                    b.HasOne("FavourPal.Api.Models.Users", "RequestFrom")
                         .WithMany("RequestsFrom")
                         .HasForeignKey("RequestFromUser");
 
-                    b.HasOne("FavourPal.Api.Models._Users", "RequestTo")
+                    b.HasOne("FavourPal.Api.Models.Users", "RequestTo")
                         .WithMany("RequestsTo")
                         .HasForeignKey("RequestToUser");
                 });

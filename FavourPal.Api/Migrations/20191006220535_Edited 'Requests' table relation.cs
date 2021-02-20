@@ -17,22 +17,22 @@ namespace FavourPal.Api.Migrations
                 table: "DebtReturned");
 
             migrationBuilder.DropForeignKey(
-                name: "FK_Requests_AspNetUsers_UsersId",
+                name: "FKRequests_AspNetUsersUsersId",
                 schema: "dbo",
                 table: "Requests");
 
             migrationBuilder.DropForeignKey(
-                name: "FK_Requests_AspNetUsers_UsersId1",
+                name: "FKRequests_AspNetUsersUsersId1",
                 schema: "dbo",
                 table: "Requests");
 
             migrationBuilder.DropIndex(
-                name: "IX_Requests_UsersId",
+                name: "IXRequestsUsersId",
                 schema: "dbo",
                 table: "Requests");
 
             migrationBuilder.DropIndex(
-                name: "IX_Requests_UsersId1",
+                name: "IXRequestsUsersId1",
                 schema: "dbo",
                 table: "Requests");
 
@@ -182,13 +182,13 @@ namespace FavourPal.Api.Migrations
                 oldNullable: true);
 
             migrationBuilder.CreateIndex(
-                name: "IX_Requests_UsersId",
+                name: "IXRequestsUsersId",
                 schema: "dbo",
                 table: "Requests",
                 column: "UsersId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Requests_UsersId1",
+                name: "IXRequestsUsersId1",
                 schema: "dbo",
                 table: "Requests",
                 column: "UsersId1");
@@ -224,7 +224,7 @@ namespace FavourPal.Api.Migrations
                 onDelete: ReferentialAction.Restrict);
 
             migrationBuilder.AddForeignKey(
-                name: "FK_Requests_AspNetUsers_UsersId",
+                name: "FKRequests_AspNetUsersUsersId",
                 schema: "dbo",
                 table: "Requests",
                 column: "UsersId",
@@ -233,7 +233,7 @@ namespace FavourPal.Api.Migrations
                 onDelete: ReferentialAction.Restrict);
 
             migrationBuilder.AddForeignKey(
-                name: "FK_Requests_AspNetUsers_UsersId1",
+                name: "FKRequests_AspNetUsersUsersId1",
                 schema: "dbo",
                 table: "Requests",
                 column: "UsersId1",

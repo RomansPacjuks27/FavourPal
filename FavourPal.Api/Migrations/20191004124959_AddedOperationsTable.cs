@@ -52,7 +52,7 @@ namespace FavourPal.Api.Migrations
                 {
                     table.PrimaryKey("PK_Operations", x => x.OperationId);
                     table.ForeignKey(
-                        name: "FK_Operations_Requests_RequestId",
+                        name: "FK_OperationsRequests_RequestId",
                         column: x => x.RequestId,
                         principalSchema: "dbo",
                         principalTable: "Requests",

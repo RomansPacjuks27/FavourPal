@@ -21,7 +21,7 @@ namespace FavourPal.Api.Migrations
                 unique: true);
 
             migrationBuilder.AddForeignKey(
-                name: "FK_DebtReturned_Requests_RequestId",
+                name: "FK_DebtReturnedRequests_RequestId",
                 schema: "dbo",
                 table: "DebtReturned",
                 column: "RequestId",
@@ -34,7 +34,7 @@ namespace FavourPal.Api.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropForeignKey(
-                name: "FK_DebtReturned_Requests_RequestId",
+                name: "FK_DebtReturnedRequests_RequestId",
                 schema: "dbo",
                 table: "DebtReturned");
 

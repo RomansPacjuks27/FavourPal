@@ -10,23 +10,31 @@ namespace FavourPal.Api.Models
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public Guid? Id { get; }
+        public Guid? Id { get; set; }
 
-        public Guid? UserId { get; set;}
+        public string UserId { get; set;}
 
         public virtual User User { get; set; }
 
+        [Column(TypeName = "decimal(10, 2)")]
         public decimal Owed { get; set; }
 
+        [Column(TypeName = "decimal(10, 2)")]
         public decimal Lent { get; set; }
 
+        [Column(TypeName = "decimal(10, 2)")]
         public decimal Amount { get; set; }
+
+        public Balance()
+        {
+
+        }
 
         public Balance(decimal _Amount)
         {
-            Amount = _Amount;
-            Owed = 0;
-            Lent = 0;
+            this.Amount = _Amount;
+            this.Owed = 0;
+            this.Lent = 0;
         }
     }
 }

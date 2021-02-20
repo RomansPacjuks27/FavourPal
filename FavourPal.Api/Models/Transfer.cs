@@ -14,11 +14,11 @@ namespace FavourPal.Api.Models
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public Guid? Id { get; set; }
 
-        [ForeignKey("FK_ReturnFrom")]
-        public int SenderUserId { get; set; }
+        public string SenderUserId { get; set; }
+        public virtual User SenderUser { get; set; }
 
-        [ForeignKey("FK_ReturnTo")]
-        public int RecipientUserId { get; set; }
+        public string RecipientUserId { get; set; }
+        public virtual User RecipientUser { get; set; }
 
         [Required]
         [Column(TypeName = "decimal(10, 2)")]

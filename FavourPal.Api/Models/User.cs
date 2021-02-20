@@ -10,6 +10,11 @@ namespace FavourPal.Api.Models
     [Table("Users", Schema = "dbo")]
     public class User : IdentityUser
     {
+        public User() : base()
+        {
+            Transfers = new List<Transfer>();
+        }
+
         [Required]
         [Column(TypeName = "varchar(255)")]
         public string FirstName { get; set; }
@@ -20,14 +25,14 @@ namespace FavourPal.Api.Models
 
         //[Column(TypeName = "decimal(10, 2)")]
         //public decimal Balance { get; set; }
-        public virtual Balance Balance { get; set; }
+        public Balance Balance { get; set; }
         
-        public virtual ICollection<Transfer> Transfers { get; set; }
+        public ICollection<Transfer> Transfers { get; set; }
 
-        public virtual ICollection<Request> RequestsFrom { get; set; }
-        public virtual ICollection<Request> RequestsTo { get; set; }
+        //public virtual ICollection<Request> RequestsFrom { get; set; }
+        //public virtual ICollection<Request> RequestsTo { get; set; }
 
-        public virtual ICollection<DebtReturned> ReturnFrom { get; set; }
-        public virtual ICollection<DebtReturned> ReturnTo { get; set; }
+        //public virtual ICollection<DebtReturned> ReturnFrom { get; set; }
+        //public virtual ICollection<DebtReturned> ReturnTo { get; set; }
     }
 }

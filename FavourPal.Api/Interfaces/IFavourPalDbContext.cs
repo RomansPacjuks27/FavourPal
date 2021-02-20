@@ -8,11 +8,10 @@ namespace FavourPal.Api.Interfaces
 {
     public interface IFavourPalDbContext : IDbContext
     {
-        DbSet<User> _Users { get; set; }
-        DbSet<Request> _Requests { get; set; }
-        DbSet<DebtTaken> _TakenDebts { get; set; }
-        DbSet<DebtReturned> _ReturnedDebts { get; set; }
-        DbSet<Balance> _Balances { get; set; }
+        DbSet<User> Users { get; set; }
+        DbSet<Request> Requests { get; set; }
+        DbSet<Balance> Balances { get; set; }
+        DbSet<Transfer> Transfers { get; set; }
 
         void DetachAllEntities();
     }

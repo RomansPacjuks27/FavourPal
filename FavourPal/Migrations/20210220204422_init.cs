@@ -1,41 +1,15 @@
 ﻿using System;
+using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 
-namespace FavourPal.Api.Migrations
+namespace FavourPal.Migrations
 {
-    public partial class newMigration : Migration
+    public partial class init : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.DropForeignKey(
-                name: "FKRequestsUsers_RequestFromUser",
-                schema: "dbo",
-                table: "Requests");
-
-            migrationBuilder.DropForeignKey(
-                name: "FKRequestsUsers_RequestToUser",
-                schema: "dbo",
-                table: "Requests");
-
-            migrationBuilder.DropTable(
-                name: "Users",
-                schema: "dbo");
-
-            migrationBuilder.AlterColumn<string>(
-                name: "RequestToUser",
-                schema: "dbo",
-                table: "Requests",
-                nullable: true,
-                oldClrType: typeof(int),
-                oldType: "int");
-
-            migrationBuilder.AlterColumn<string>(
-                name: "RequestFromUser",
-                schema: "dbo",
-                table: "Requests",
-                nullable: true,
-                oldClrType: typeof(int),
-                oldType: "int");
+            migrationBuilder.EnsureSchema(
+                name: "dbo");
 
             migrationBuilder.CreateTable(
                 name: "AspNetRoles",
@@ -56,9 +30,9 @@ namespace FavourPal.Api.Migrations
                 columns: table => new
                 {
                     Id = table.Column<string>(nullable: false),
-                    Email = table.Column<string>(maxLength: 256, nullable: true),
                     UserName = table.Column<string>(maxLength: 256, nullable: true),
                     NormalizedUserName = table.Column<string>(maxLength: 256, nullable: true),
+                    Email = table.Column<string>(maxLength: 256, nullable: true),
                     NormalizedEmail = table.Column<string>(maxLength: 256, nullable: true),
                     EmailConfirmed = table.Column<bool>(nullable: false),
                     PasswordHash = table.Column<string>(nullable: true),
@@ -71,10 +45,8 @@ namespace FavourPal.Api.Migrations
                     LockoutEnabled = table.Column<bool>(nullable: false),
                     AccessFailedCount = table.Column<int>(nullable: false),
                     Discriminator = table.Column<string>(nullable: false),
-                    FirstName = table.Column<string>(type: "varchar(50)", nullable: true),
-                    LastName = table.Column<string>(type: "varchar(50)", nullable: true),
-                    Password = table.Column<string>(type: "varchar(200)", nullable: true),
-                    Balance = table.Column<decimal>(type: "decimal(10, 2)", nullable: true)
+                    FirstName = table.Column<string>(type: "varchar(255)", nullable: true),
+                    LastName = table.Column<string>(type: "varchar(255)", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -86,7 +58,7 @@ namespace FavourPal.Api.Migrations
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
                     RoleId = table.Column<string>(nullable: false),
                     ClaimType = table.Column<string>(nullable: true),
                     ClaimValue = table.Column<string>(nullable: true)
@@ -107,7 +79,7 @@ namespace FavourPal.Api.Migrations
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
                     UserId = table.Column<string>(nullable: false),
                     ClaimType = table.Column<string>(nullable: true),
                     ClaimValue = table.Column<string>(nullable: true)
@@ -127,8 +99,8 @@ namespace FavourPal.Api.Migrations
                 name: "AspNetUserLogins",
                 columns: table => new
                 {
-                    LoginProvider = table.Column<string>(maxLength: 128, nullable: false),
-                    ProviderKey = table.Column<string>(maxLength: 128, nullable: false),
+                    LoginProvider = table.Column<string>(nullable: false),
+                    ProviderKey = table.Column<string>(nullable: false),
                     ProviderDisplayName = table.Column<string>(nullable: true),
                     UserId = table.Column<string>(nullable: false)
                 },
@@ -172,8 +144,8 @@ namespace FavourPal.Api.Migrations
                 columns: table => new
                 {
                     UserId = table.Column<string>(nullable: false),
-                    LoginProvider = table.Column<string>(maxLength: 128, nullable: false),
-                    Name = table.Column<string>(maxLength: 128, nullable: false),
+                    LoginProvider = table.Column<string>(nullable: false),
+                    Name = table.Column<string>(nullable: false),
                     Value = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
@@ -185,6 +157,84 @@ namespace FavourPal.Api.Migrations
                         principalTable: "AspNetUsers",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Balances",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(nullable: false),
+                    UserId = table.Column<string>(nullable: true),
+                    Owed = table.Column<decimal>(type: "decimal(10, 2)", nullable: false),
+                    Lent = table.Column<decimal>(type: "decimal(10, 2)", nullable: false),
+                    Amount = table.Column<decimal>(type: "decimal(10, 2)", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Balances", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Balances_AspNetUsers_UserId",
+                        column: x => x.UserId,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Requests",
+                schema: "dbo",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(nullable: false),
+                    SenderUserId = table.Column<string>(nullable: true),
+                    RecipientUserId = table.Column<string>(nullable: true),
+                    AmountRequested = table.Column<decimal>(type: "decimal(10, 2)", nullable: false),
+                    AmountPaid = table.Column<decimal>(type: "decimal(10, 2)", nullable: false),
+                    Message = table.Column<string>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Requests", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Requests_AspNetUsers_RecipientUserId",
+                        column: x => x.RecipientUserId,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_Requests_AspNetUsers_SenderUserId",
+                        column: x => x.SenderUserId,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Transfers",
+                schema: "dbo",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(nullable: false),
+                    SenderUserId = table.Column<string>(nullable: true),
+                    RecipientUserId = table.Column<string>(nullable: true),
+                    Amount = table.Column<decimal>(type: "decimal(10, 2)", nullable: false),
+                    SendOn = table.Column<DateTime>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Transfers", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Transfers_AspNetUsers_RecipientUserId",
+                        column: x => x.RecipientUserId,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_Transfers_AspNetUsers_SenderUserId",
+                        column: x => x.SenderUserId,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateIndex(
@@ -226,37 +276,40 @@ namespace FavourPal.Api.Migrations
                 unique: true,
                 filter: "[NormalizedUserName] IS NOT NULL");
 
-            migrationBuilder.AddForeignKey(
-                name: "FKRequests_AspNetUsers_RequestFromUser",
-                schema: "dbo",
-                table: "Requests",
-                column: "RequestFromUser",
-                principalTable: "AspNetUsers",
-                principalColumn: "Id",
-                onDelete: ReferentialAction.Restrict);
+            migrationBuilder.CreateIndex(
+                name: "IX_Balances_UserId",
+                table: "Balances",
+                column: "UserId",
+                unique: true,
+                filter: "[UserId] IS NOT NULL");
 
-            migrationBuilder.AddForeignKey(
-                name: "FKRequests_AspNetUsers_RequestToUser",
+            migrationBuilder.CreateIndex(
+                name: "IX_Requests_RecipientUserId",
                 schema: "dbo",
                 table: "Requests",
-                column: "RequestToUser",
-                principalTable: "AspNetUsers",
-                principalColumn: "Id",
-                onDelete: ReferentialAction.Restrict);
+                column: "RecipientUserId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Requests_SenderUserId",
+                schema: "dbo",
+                table: "Requests",
+                column: "SenderUserId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Transfers_RecipientUserId",
+                schema: "dbo",
+                table: "Transfers",
+                column: "RecipientUserId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Transfers_SenderUserId",
+                schema: "dbo",
+                table: "Transfers",
+                column: "SenderUserId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.DropForeignKey(
-                name: "FKRequests_AspNetUsers_RequestFromUser",
-                schema: "dbo",
-                table: "Requests");
-
-            migrationBuilder.DropForeignKey(
-                name: "FKRequests_AspNetUsers_RequestToUser",
-                schema: "dbo",
-                table: "Requests");
-
             migrationBuilder.DropTable(
                 name: "AspNetRoleClaims");
 
@@ -273,66 +326,21 @@ namespace FavourPal.Api.Migrations
                 name: "AspNetUserTokens");
 
             migrationBuilder.DropTable(
+                name: "Balances");
+
+            migrationBuilder.DropTable(
+                name: "Requests",
+                schema: "dbo");
+
+            migrationBuilder.DropTable(
+                name: "Transfers",
+                schema: "dbo");
+
+            migrationBuilder.DropTable(
                 name: "AspNetRoles");
 
             migrationBuilder.DropTable(
                 name: "AspNetUsers");
-
-            migrationBuilder.AlterColumn<int>(
-                name: "RequestToUser",
-                schema: "dbo",
-                table: "Requests",
-                type: "int",
-                nullable: false,
-                oldClrType: typeof(string),
-                oldNullable: true);
-
-            migrationBuilder.AlterColumn<int>(
-                name: "RequestFromUser",
-                schema: "dbo",
-                table: "Requests",
-                type: "int",
-                nullable: false,
-                oldClrType: typeof(string),
-                oldNullable: true);
-
-            migrationBuilder.CreateTable(
-                name: "Users",
-                schema: "dbo",
-                columns: table => new
-                {
-                    UserId = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    Balance = table.Column<decimal>(type: "decimal(10, 2)", nullable: false),
-                    Email = table.Column<string>(type: "varchar(200)", nullable: false),
-                    FirstName = table.Column<string>(type: "varchar(50)", nullable: false),
-                    LastName = table.Column<string>(type: "varchar(50)", nullable: false),
-                    Password = table.Column<string>(type: "varchar(200)", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PKUsers", x => x.UserId);
-                });
-
-            migrationBuilder.AddForeignKey(
-                name: "FKRequestsUsers_RequestFromUser",
-                schema: "dbo",
-                table: "Requests",
-                column: "RequestFromUser",
-                principalSchema: "dbo",
-                principalTable: "Users",
-                principalColumn: "UserId",
-                onDelete: ReferentialAction.Cascade);
-
-            migrationBuilder.AddForeignKey(
-                name: "FKRequestsUsers_RequestToUser",
-                schema: "dbo",
-                table: "Requests",
-                column: "RequestToUser",
-                principalSchema: "dbo",
-                principalTable: "Users",
-                principalColumn: "UserId",
-                onDelete: ReferentialAction.Cascade);
         }
     }
 }

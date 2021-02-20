@@ -1,27 +1,16 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Identity;
-//using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.AspNetCore.Localization;
 using FavourPal.Api.Models;
-using FavourPal.Api;
 using System.Globalization;
-using Microsoft.AspNetCore.Mvc.Razor;
-using Microsoft.AspNetCore.Mvc.Razor.Compilation;
-using Microsoft.AspNetCore.Mvc.RazorPages;
-using Microsoft.AspNetCore.Razor.Runtime;
-using Microsoft.AspNetCore.Razor.Hosting;
-using Microsoft.AspNetCore.Razor;
-using Microsoft.AspNetCore.HttpsPolicy;
+using FavourPal.Api.Interfaces;
+using FavourPal.Api.Services;
 
 namespace FavourPal
 {
@@ -49,11 +38,13 @@ namespace FavourPal
                 option.MinimumSameSitePolicy = SameSiteMode.None;
             });
 
-            services.AddDbContext<Api.Models.FavourPalDbContext>(option =>
-                option.UseSqlServer(
-                    Configuration.GetConnectionString("DefaultConnection")));
-            services.AddIdentity<Users, IdentityRole>()
-                .AddEntityFrameworkStores<Api.Models.FavourPalDbContext>();
+            services.AddDbContext<FavourPalDbContext>(option => option.UseSqlServer("DefaultConnection"));
+            services.AddScoped<IFavourPalDbContext>(sp => sp.GetRequiredService<FavourPalDbContext>());
+
+            services.AddScoped<IAccountService, AccountService>();
+
+            services.AddIdentity<User, IdentityRole>()
+                .AddEntityFrameworkStores<FavourPalDbContext>();
             //services.AddControllersWithViews().AddRazorRuntimeCompilation();
 
             MvcOptions options = new MvcOptions();

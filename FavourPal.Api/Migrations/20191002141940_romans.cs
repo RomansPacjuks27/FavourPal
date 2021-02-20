@@ -24,7 +24,7 @@ namespace FavourPal.Api.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Users", x => x.UserId);
+                    table.PrimaryKey("PKUsers", x => x.UserId);
                 });
 
             migrationBuilder.CreateTable(
@@ -41,16 +41,16 @@ namespace FavourPal.Api.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Requests", x => x.RequestId);
+                    table.PrimaryKey("PKRequests", x => x.RequestId);
                     table.ForeignKey(
-                        name: "FK_Requests_Users_RequestFromUser",
+                        name: "FKRequestsUsers_RequestFromUser",
                         column: x => x.RequestFromUser,
                         principalSchema: "dbo",
                         principalTable: "Users",
                         principalColumn: "UserId",
                         onDelete: ReferentialAction.NoAction);
                     table.ForeignKey(
-                        name: "FK_Requests_Users_RequestToUser",
+                        name: "FKRequestsUsers_RequestToUser",
                         column: x => x.RequestToUser,
                         principalSchema: "dbo",
                         principalTable: "Users",
@@ -59,13 +59,13 @@ namespace FavourPal.Api.Migrations
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_Requests_RequestFromUser",
+                name: "IXRequests_RequestFromUser",
                 schema: "dbo",
                 table: "Requests",
                 column: "RequestFromUser");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Requests_RequestToUser",
+                name: "IXRequests_RequestToUser",
                 schema: "dbo",
                 table: "Requests",
                 column: "RequestToUser");

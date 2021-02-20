@@ -1,14 +1,14 @@
 ﻿@using Microsoft.AspNetCore.Identity
 @using FavourPal.Api.Models
 
-@inject SignInManager<Users> SignInManager
-@inject UserManager<Users> UserManager
+@inject SignInManager<User> SignInManager
+@inject UserManager<User> UserManager
 
 @if (SignInManager.IsSignedIn(User))
 {
     <div class="row margin-top-20">
         <div class="col-md-3 col-md-offset-3">
-            <a href="@Url.Action("LoanMoney", "Request")" class="btn btn-primary btn-block btn-lg" style="background-color:teal; border-color:teal">Request a loan</a>
+            <a href="@Url.Action("SendRequest", "Request")" class="btn btn-primary btn-block btn-lg" style="background-color:teal; border-color:teal">Request a loan</a>
         </div>
         <div class="col-md-3 text-center">
             <a href="@Url.Action("ViewDebts", "DebtReturn")" class="btn btn-primary btn-block btn-lg" style="background-color:teal; border-color:teal">Return the debt</a>

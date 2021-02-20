@@ -9,13 +9,12 @@ using System.Linq;
 
 namespace FavourPal.Api.Models
 {
-    public class FavourPalDbContext : DbContext, IFavourPalDbContext
+    public class FavourPalDbContext : IdentityDbContext<User>, IFavourPalDbContext
     {
-        public DbSet<User> _Users { get; set; }
-        public DbSet<Request> _Requests { get; set; }
-        public DbSet<DebtTaken> _TakenDebts { get; set; }
-        public DbSet<DebtReturned> _ReturnedDebts { get; set; }
-        public DbSet<Balance> _Balances { get; set; }
+        public DbSet<User> Users { get; set; }
+        public DbSet<Request> Requests { get; set; }
+        public DbSet<Balance> Balances { get; set; }
+        public DbSet<Transfer> Transfers { get; set; }
 
         public FavourPalDbContext(DbContextOptions<FavourPalDbContext> options)
     : base(options)
@@ -27,10 +26,27 @@ namespace FavourPal.Api.Models
 
         //}
 
-        //protected override void OnConfiguring (DbContextOptionsBuilder options)
-        //{
-        //    options.UseSqlServer(@"Data Source=(localDB)\MSSQLLocalDb;Initial Catalog=Favour_Pal;Integrated Security=True");
-        //}
+        protected override void OnConfiguring(DbContextOptionsBuilder options)
+        {
+            options.UseSqlServer(@"Data Source=(localDB)\MSSQLLocalDb;Initial Catalog=Favour_Pal;Integrated Security=True", b => b.MigrationsAssembly("FavourPal"));
+            base.OnConfiguring(options);
+        }
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<User>().HasMany(user => user.Transfers)
+                .WithOne(x => x.SenderUser)
+                .HasForeignKey(x => x.SenderUserId);
+
+            modelBuilder.Entity<User>().HasOne(user => user.Balance)
+                .WithOne(balance => balance.User)
+                .HasForeignKey<Balance>(balance => balance.UserId);
+
+            base.OnModelCreating(modelBuilder);
+            //modelBuilder.Entity<User>().HasMany(user => user.Transfers)
+            //    .WithOne(x => x.RecipientUser)
+            //    .HasForeignKey(x => x.RecipientUserId);
+        }
 
 
         public void DetachAllEntities()

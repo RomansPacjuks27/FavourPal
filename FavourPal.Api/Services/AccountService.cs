@@ -12,17 +12,17 @@ namespace FavourPal.Api.Services
     public class AccountService : BaseService, IAccountService
     {
         private readonly IFavourPalDbContext dbContext;
-        AccountService(IFavourPalDbContext _dbContext) : base(_dbContext)
+        public AccountService(IFavourPalDbContext _dbContext) : base(_dbContext)
         {
             dbContext = _dbContext;
         }
 
         public async Task<Balance> GetBalance()
         {
-            User currentUser = dbContext._Users.Where(x => x.UserName == AuthorizedUser.UserName).First();
+            User currentUser = dbContext.Users.Where(x => x.UserName == AuthorizedUser.UserName).First();
 
             //var userOwed = (from x in dbContext._TakenDebts join
-            //                y in dbContext._Requests on
+            //                y in dbContext.Requests on
             //                x.RequestId equals y.RequestId where 
             //                y.RequestFromUser == currentUser.Id && 
             //                y.Accepted == true &&
@@ -33,7 +33,7 @@ namespace FavourPal.Api.Services
             //                }).ToList().Sum(x => (double)x.Amount);
 
             //var userlent = (from x in dbContext._TakenDebts join
-            //                y in dbContext._Requests on
+            //                y in dbContext.Requests on
             //                x.RequestId equals y.RequestId where
             //                y.RequestToUser == currentUser.Id && 
             //                y.Accepted == true &&
@@ -50,7 +50,7 @@ namespace FavourPal.Api.Services
             //    Balance = (double)currentUser.Balance 
             //};
 
-            var res = await dbContext._Balances.FirstOrDefaultAsync(x => x.UserId == new Guid(AuthorizedUser.Id));
+            var res = await dbContext.Balances.FirstOrDefaultAsync(x => x.UserId == AuthorizedUser.Id);
             return res;
         }
 
