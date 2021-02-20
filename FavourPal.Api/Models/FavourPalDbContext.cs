@@ -9,7 +9,7 @@ using System.Linq;
 
 namespace FavourPal.Api.Models
 {
-    public class FavourPalDbContext : IdentityDbContext<User>, IFavourPalDbContext
+    public class FavourPalDbContext : IdentityDbContext, IFavourPalDbContext
     {
         public DbSet<User> Users { get; set; }
         public DbSet<Request> Requests { get; set; }
