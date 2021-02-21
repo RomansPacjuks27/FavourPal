@@ -18,8 +18,8 @@ namespace FavourPal.Api.Interfaces
         int SaveContext();
         DbSet<TEntity> Set<TEntity>() where TEntity : class;
         EntityEntry<TEntity> Add<TEntity>(TEntity entity) where TEntity : class;
-        Task<EntityEntry> AddAsync(object entity, CancellationToken cancellationToken = default(CancellationToken));
-        Task<EntityEntry<TEntity>> AddAsync<TEntity>(TEntity entity, CancellationToken cancellationToken = default(CancellationToken)) where TEntity : class;
+        ValueTask<EntityEntry> AddAsync(object entity, CancellationToken cancellationToken = default(CancellationToken));
+        ValueTask<EntityEntry<TEntity>> AddAsync<TEntity>(TEntity entity, CancellationToken cancellationToken = default(CancellationToken)) where TEntity : class;
         void AddRange(IEnumerable<object> entities);
         void AddRange(params object[] entities);
         Task AddRangeAsync(params object[] entities);
@@ -32,10 +32,10 @@ namespace FavourPal.Api.Interfaces
         EntityEntry Entry(object entity);
         object Find(Type entityType, params object[] keyValues);
         TEntity Find<TEntity>(params object[] keyValues) where TEntity : class;
-        Task<object> FindAsync(Type entityType, object[] keyValues, CancellationToken cancellationToken);
-        Task<TEntity> FindAsync<TEntity>(object[] keyValues, CancellationToken cancellationToken) where TEntity : class;
-        Task<TEntity> FindAsync<TEntity>(params object[] keyValues) where TEntity : class;
-        Task<object> FindAsync(Type entityType, params object[] keyValues);
+        ValueTask<object> FindAsync(Type entityType, object[] keyValues, CancellationToken cancellationToken);
+        ValueTask<TEntity> FindAsync<TEntity>(object[] keyValues, CancellationToken cancellationToken) where TEntity : class;
+        ValueTask<TEntity> FindAsync<TEntity>(params object[] keyValues) where TEntity : class;
+        ValueTask<object> FindAsync(Type entityType, params object[] keyValues);
         EntityEntry<TEntity> Remove<TEntity>(TEntity entity) where TEntity : class;
         EntityEntry Remove(object entity);
         void RemoveRange(IEnumerable<object> entities);

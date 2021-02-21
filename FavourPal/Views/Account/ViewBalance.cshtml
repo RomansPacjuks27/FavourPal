@@ -22,16 +22,16 @@
             @Html.DisplayFor(model => model.Lent)
         </dd>
         <dt>
-            @Html.DisplayNameFor(model => model.Balance)
+            @Html.DisplayNameFor(model => model.Amount)
         </dt>
         <dd>
-            @if (Model.Balance >= 0)
+            @if (Model.Amount >= 0)
             {
-                <span style="color:green">@Html.DisplayFor(model => model.Balance)</span>
+                <span style="color:green">@Html.DisplayFor(model => model.Amount)</span>
             }
             else
             {
-                <span style="color:red">@Html.DisplayFor(model => model.Balance)</span>
+                <span style="color:red">@Html.DisplayFor(model => model.Amount)</span>
             }
         </dd>
     </dl>

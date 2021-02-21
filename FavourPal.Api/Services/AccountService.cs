@@ -51,6 +51,7 @@ namespace FavourPal.Api.Services
             //};
 
             var res = await dbContext.Balances.FirstOrDefaultAsync(x => x.UserId == AuthorizedUser.Id);
+
             return res;
         }
 

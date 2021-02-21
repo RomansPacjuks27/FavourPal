@@ -28,7 +28,7 @@ namespace FavourPal.Api.Models
 
         protected override void OnConfiguring(DbContextOptionsBuilder options)
         {
-            options.UseSqlServer(@"Data Source=(localDB)\MSSQLLocalDb;Initial Catalog=Favour_Pal;Integrated Security=True", b => b.MigrationsAssembly("FavourPal"));
+            options.UseSqlServer(@"Data Source=(localDB)\MSSQLLocalDb;Initial Catalog=Favour_Pal;Integrated Security=True", b => b.MigrationsAssembly("FavourPal.Api"));
             base.OnConfiguring(options);
         }
 

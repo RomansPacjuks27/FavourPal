@@ -11,6 +11,7 @@ using FavourPal.Api.Models;
 using System.Globalization;
 using FavourPal.Api.Interfaces;
 using FavourPal.Api.Services;
+using Microsoft.AspNetCore.Hosting;
 
 namespace FavourPal
 {
@@ -45,21 +46,20 @@ namespace FavourPal
 
             services.AddIdentity<User, IdentityRole>()
                 .AddEntityFrameworkStores<FavourPalDbContext>();
-            //services.AddControllersWithViews().AddRazorRuntimeCompilation();
 
             MvcOptions options = new MvcOptions();
             options.EnableEndpointRouting = false;
 
-            services.AddMvc(option => option.EnableEndpointRouting = false).SetCompatibilityVersion(CompatibilityVersion.Version_2_0);
+            services.AddControllersWithViews();
+            services.AddRazorPages();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
-                app.UseDatabaseErrorPage();
             }
             else
             {
@@ -69,21 +69,17 @@ namespace FavourPal
 
             app.UseHttpsRedirection();
             app.UseStaticFiles();
-            app.UseCookiePolicy();
-
+            app.UseRouting();
             app.UseAuthentication();
+            app.UseAuthorization();
 
-            app.UseMvc(routes =>
+            app.UseEndpoints(endpoints =>
             {
-                //routes.MapRoute(
-                //    name: "Request",
-                //    template: "Request/{action}/{id?}",
-                //    defaults: new { controller = "Home" });
-                routes.MapRoute(
-                    name: "default",
-                    template: "{controller=Home}/{action=Index}/{id?}");
+                endpoints.MapControllerRoute(
+                name: "default",
+                pattern: "{controller=Home}/{action=Index}/{id?}");
+                endpoints.MapRazorPages();
             });
-
         }
     }
 }

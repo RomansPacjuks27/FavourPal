@@ -110,8 +110,8 @@ namespace FavourPal.Controllers
 
         public ActionResult ViewBalance()
         {
+            var uz = this.User;
             var model = accountService.GetBalance();
-
             return View(model);
         }
     }

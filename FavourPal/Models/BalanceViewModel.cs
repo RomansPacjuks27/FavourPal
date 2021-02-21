@@ -10,14 +10,14 @@ namespace FavourPal.Models
     {
         [Display(Name = "Currently owed")]
         [DataType(DataType.Currency)]
-        public double Owed { get; set; } = 0.0;
+        public decimal Owed { get; set; }
 
         [Display(Name = "Currently lent")]
         [DataType(DataType.Currency)]
-        public double Lent { get; set; } = 0.0;
+        public decimal Lent { get; set; }
 
-        [Display(Name = "Balance")]
+        [Display(Name = "Balance Amount")]
         [DataType(DataType.Currency)]
-        public double Balance { get; set; }
+        public decimal Amount { get; set; }
     }
 }
