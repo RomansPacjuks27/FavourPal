@@ -13,6 +13,8 @@ namespace FavourPal.Profiles
         public DomainToViewMapperProfile()
         {
             CreateMap<Balance, BalanceViewModel>();
+            CreateMap<Request, RequestViewModel>()
+                .ForMember(dest => dest.Email, opt => opt.MapFrom(x => x.SenderUser != null ? x.SenderUser.Email : ""));
         }
     }
 }

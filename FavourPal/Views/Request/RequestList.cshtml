@@ -12,13 +12,13 @@
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.First().RequestId)
+                @Html.DisplayNameFor(model => model.First().Id)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.First().Email)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.First().Amount)
+                @Html.DisplayNameFor(model => model.First().AmountRequested)
             </th>
             <th></th>
         </tr>
@@ -27,13 +27,13 @@
 @foreach (var item in Model) {
         <tr>
             <td>
-                @Html.DisplayFor(modelItem => item.RequestId)
+                @Html.DisplayFor(modelItem => item.Id)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Email)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Amount)
+                @Html.DisplayFor(modelItem => item.AmountRequested)
             </td>
             <td>
                 @Html.ActionLink("Accept", "AcceptRequest", item) |

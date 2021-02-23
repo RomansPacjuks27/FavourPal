@@ -9,12 +9,15 @@ namespace FavourPal.Models
     public class RequestViewModel
     {
         [Display(Name = "Request ID")]
-        public int RequestId { get; set; }
-
-        [Required(ErrorMessage = "Email is required!")]
-        public string Email { get; set; }
+        public Guid? Id { get; set; }
 
         [Required(ErrorMessage = "Amount is required!")]
-        public decimal Amount { get; set; }
+        public decimal AmountRequested { get; set; }
+
+        public decimal AmountPaid { get; set; }
+
+        public string Message { get; set; }
+        [Required(ErrorMessage = "Email is required!")]
+        public string Email { get; set; }
     }
 }

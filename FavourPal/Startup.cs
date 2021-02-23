@@ -40,10 +40,13 @@ namespace FavourPal
                 option.MinimumSameSitePolicy = SameSiteMode.None;
             });
 
+            //move out to config function
             services.AddAutoMapper(c => c.AddProfile<DomainToViewMapperProfile>(), typeof(Startup));
             services.AddDbContext<FavourPalDbContext>(option => option.UseSqlServer("DefaultConnection", b => b.MigrationsAssembly("FavourPal.Api")));
             services.AddScoped<IFavourPalDbContext>(sp => sp.GetRequiredService<FavourPalDbContext>());
 
+            //move out to config function
+            services.AddScoped<IRequestService, RequestService>();
             services.AddScoped<IAccountService, AccountService>();
 
             services.AddIdentity<User, IdentityRole>()

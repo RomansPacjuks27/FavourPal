@@ -4,12 +4,22 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using FavourPal.Models;
 using FavourPal.Api.Models;
+using FavourPal.Api.Interfaces;
+using AutoMapper;
 
 namespace FavourPal.Controllers
 {
     [Authorize]
-    public class RequestController : Controller
+    public class RequestController : BaseController
     {
+        protected readonly IMapper mapper;
+        protected readonly IRequestService requestService;
+        public RequestController(IRequestService _requestService, IMapper _mapper) : base(_requestService)
+        {
+            requestService = _requestService;
+            mapper = _mapper;
+        }
+
         public IActionResult Index()
         {
             return RedirectToAction("Index", "Home");
@@ -25,44 +35,20 @@ namespace FavourPal.Controllers
         [ValidateAntiForgeryToken]
         public IActionResult SendRequest(RequestViewModel model)
         {
-            //if (ModelState.IsValid)
-            //{
-            //    var requestTarget = dbContext.Users.Where(x => x.UserName == model.Email).FirstOrDefault();
-            //    var requestSource = dbContext.Users.Where(x => x.UserName == User.Identity.Name).FirstOrDefault();
-            //    if (requestTarget != null)
-            //    {
-            //        if(requestSource == requestTarget)
-            //        {
-            //            TempData["RequestCreate"] = "You cannot request money from yourself!";
-            //            return RedirectToAction("SendRequest");
-            //        }
+            if (ModelState.IsValid)
+            {
+                requestService.SendRequest(mapper.Map<Request>(model));
+            }
+            else
+            {
+                //var errors = ModelState.Select(x => x.Value.Errors).ToList();
+                //foreach(var err in errors)
+                //{
+                //    //fill collection to tempdata
+                //}
+                return RedirectToAction("SendRequest");
+            }
 
-            //        Request request = new Request
-            //        {
-            //            RequestFromUser = User.Identity.Name,
-            //            RequestToUser = model.Email,
-            //            Amount = (decimal)model.Amount,
-            //            Accepted = false
-            //        };
-
-            //        dbContext.Requests.Attach(request);
-            //        request.FK_RequestFrom = requestSource;
-            //        request.FK_RequestTo = requestTarget;
-
-            //        requestSource.RequestsFrom = new List<Request>
-            //        {
-            //            request
-            //        };
-
-            //        requestTarget.RequestsTo = new List<Request>
-            //        {
-            //            request
-            //        };
-
-            //        dbContext.SaveChanges();
-            //        TempData["RequestCreate"] = "Request was successfully sent!";
-            //        return RedirectToAction("SendRequest");
-            //    }
             //    TempData["RequestCreate"] = "Recipient email does not exist!";
             //    return RedirectToAction("SendRequest");
             //}
@@ -70,8 +56,9 @@ namespace FavourPal.Controllers
             return RedirectToAction("SendRequest");
         }
 
-        public IActionResult ViewRequests()
+        public IActionResult RequestList()
         {
+            List<RequestViewModel> requestList = mapper.Map<List<RequestViewModel>>(requestService.GetAll().Result);
             //List<RequestViewModel> requestList = new List<RequestViewModel>();
             //string userId = dbContext.Users.Where(x => x.UserName == User.Identity.Name).Select(y => y.Id).First();
             //string email = "";
@@ -87,8 +74,7 @@ namespace FavourPal.Controllers
             //        RequestId = element.RequestId
             //    });
             //}
-            //return View(requestList);
-            return View();
+            return View(requestList);
         }
 
         public IActionResult AcceptRequest(RequestViewModel model)
