@@ -1,5 +1,6 @@
 ﻿using FavourPal.Api.Interfaces;
 using FavourPal.Api.Models;
+using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -19,7 +20,8 @@ namespace FavourPal.Api.Services
 
         public async Task<Balance> GetBalance()
         {
-            User currentUser = dbContext.Users.Where(x => x.UserName == AuthorizedUser.UserName).First();
+            //User currentUser = AuthorizedUser;
+            //User currentUser = dbContext.Users.Where(x => x.UserName == AuthorizedUser.UserName).First();
 
             //var userOwed = (from x in dbContext._TakenDebts join
             //                y in dbContext.Requests on

@@ -12,6 +12,7 @@ using System.Globalization;
 using FavourPal.Api.Interfaces;
 using FavourPal.Api.Services;
 using Microsoft.AspNetCore.Hosting;
+using FavourPal.Profiles;
 
 namespace FavourPal
 {
@@ -39,13 +40,15 @@ namespace FavourPal
                 option.MinimumSameSitePolicy = SameSiteMode.None;
             });
 
-            services.AddDbContext<FavourPalDbContext>(option => option.UseSqlServer("DefaultConnection"));
+            services.AddAutoMapper(c => c.AddProfile<DomainToViewMapperProfile>(), typeof(Startup));
+            services.AddDbContext<FavourPalDbContext>(option => option.UseSqlServer("DefaultConnection", b => b.MigrationsAssembly("FavourPal.Api")));
             services.AddScoped<IFavourPalDbContext>(sp => sp.GetRequiredService<FavourPalDbContext>());
 
             services.AddScoped<IAccountService, AccountService>();
 
             services.AddIdentity<User, IdentityRole>()
-                .AddEntityFrameworkStores<FavourPalDbContext>();
+                .AddEntityFrameworkStores<FavourPalDbContext>()
+                .AddDefaultTokenProviders();
 
             MvcOptions options = new MvcOptions();
             options.EnableEndpointRouting = false;

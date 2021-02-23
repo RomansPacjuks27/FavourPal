@@ -12,23 +12,26 @@ using FavourPal.Models;
 using FavourPal.Api.Models;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
 using FavourPal.Api.Interfaces;
+using AutoMapper;
 
 namespace FavourPal.Controllers
 {
     [Authorize]
-    public class AccountController : Controller
+    public class AccountController : BaseController
     {
         //public readonly EFDataContext dbContext = new EFDataContext();
 
         private SignInManager<User> signInManager { get; set; }
         private UserManager<User> userInManager { get; set; }
         private readonly IAccountService accountService;
+        private readonly IMapper mapper;
 
-        public AccountController (SignInManager<User> _signInManager, UserManager<User> _userManager, IAccountService _accountService)
+        public AccountController (SignInManager<User> _signInManager, UserManager<User> _userManager, IAccountService _accountService, IMapper _mapper) : base(_accountService)
         {
             this.signInManager = _signInManager;
             this.userInManager = _userManager;
             this.accountService = _accountService;
+            this.mapper = _mapper;
         }
 
         [AllowAnonymous]
@@ -110,9 +113,8 @@ namespace FavourPal.Controllers
 
         public ActionResult ViewBalance()
         {
-            var uz = this.User;
-            var model = accountService.GetBalance();
-            return View(model);
+            var balance = mapper.Map<BalanceViewModel>(accountService.GetBalance().Result);
+            return View(balance);
         }
     }
 }
