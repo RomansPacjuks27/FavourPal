@@ -56,7 +56,7 @@ namespace FavourPal
             MvcOptions options = new MvcOptions();
             options.EnableEndpointRouting = false;
 
-            services.AddControllersWithViews();
+            services.AddControllersWithViews().AddRazorRuntimeCompilation();
             services.AddRazorPages();
         }
 

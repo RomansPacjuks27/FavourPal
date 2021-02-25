@@ -39,3 +39,8 @@ body {
 .margin-top-20{
     margin-top: 20px;
 }
+
+.btn-add {
+    background-color: #29a520 !important;
+    color: #fff !important;
+}

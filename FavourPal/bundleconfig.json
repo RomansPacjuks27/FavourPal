@@ -1,0 +1,16 @@
+[
+  {
+    "outputFileName": "wwwroot/bundles/site.min.css",
+    "inputFiles": [
+      "wwwroot/lib/fontawesome-free-5.15.2-web/css/all.css",
+      "wwwroot/css/site.css"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/bundles/site.min.js",
+    "inputFiles": [
+      "wwwroot/lib/fontawesome-free-5.15.2-web/js/all.js",
+      "wwwroot/js/site.js"
+    ]
+  }
+]
