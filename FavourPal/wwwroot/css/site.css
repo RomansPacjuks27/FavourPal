@@ -41,6 +41,55 @@ body {
 }
 
 .btn-add {
-    background-color: #29a520 !important;
-    color: #fff !important;
+  color: #fff;
+  background-color: #ff0000;
+  border-color: #32d026;
+}
+.btn-add:focus,
+.btn-add.focus {
+  color: #fff;
+  background-color: #ff0000;
+  border-color: #13650c;
+}
+.btn-add:hover {
+  color: #fff;
+  background-color: #ff0000;
+  border-color: #13650c;
+}
+.btn-add:active,
+.btn-add.active,
+.open > .dropdown-toggle.btn-add {
+    color: #fff;
+    background-color: #ff0000;
+    background-image: none;
+    border-color: #13650c;
+}
+    .btn-add:active:hover,
+    .btn-add.active:hover,
+    .open > .dropdown-toggle.btn-add:hover,
+    .btn-add:active:focus,
+    .btn-add.active:focus,
+    .open > .dropdown-toggle.btn-add:focus,
+    .btn-add:active.focus,
+    .btn-add.active.focus,
+    .open > .dropdown-toggle.btn-add.focus {
+        color: #fff;
+        background-color: #ff0000;
+        border-color: #13650c;
+    }
+.btn-add.disabled:hover,
+.btn-add[disabled]:hover,
+fieldset[disabled] .btn-add:hover,
+.btn-add.disabled:focus,
+.btn-add[disabled]:focus,
+fieldset[disabled] .btn-add:focus,
+.btn-add.disabled.focus,
+.btn-add[disabled].focus,
+fieldset[disabled] .btn-add.focus {
+    background-color: #337ab7;
+    border-color: #2e6da4;
+}
+.btn-add .badge {
+    color: #337ab7;
+    background-color: #fff;
 }

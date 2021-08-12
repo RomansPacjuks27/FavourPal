@@ -9,9 +9,9 @@ using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using FavourPal.Models;
-using FavourPal.Api.Models;
+using FavourPal.Domain.Models;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
-using FavourPal.Api.Interfaces;
+using FavourPal.Domain.Interfaces;
 using AutoMapper;
 
 namespace FavourPal.Controllers

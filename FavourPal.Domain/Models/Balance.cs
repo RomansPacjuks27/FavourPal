@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Text;
 
-namespace FavourPal.Api.Models
+namespace FavourPal.Domain.Models
 {
     public class Balance
     {

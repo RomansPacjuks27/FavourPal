@@ -10,6 +10,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FavourPal", "FavourPal\Favo
 		{30C0DF92-B89D-452D-9BB0-EDC96F4FCFA7} = {30C0DF92-B89D-452D-9BB0-EDC96F4FCFA7}
 	EndProjectSection
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FavourPal.Domain", "FavourPal.Domain\FavourPal.Domain.csproj", "{BE00D062-4FC7-4C1F-BBD0-8CBC9DEF51B1}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -24,6 +26,10 @@ Global
 		{467028CF-AA34-42F1-9DD0-26E31ED86B91}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{467028CF-AA34-42F1-9DD0-26E31ED86B91}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{467028CF-AA34-42F1-9DD0-26E31ED86B91}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BE00D062-4FC7-4C1F-BBD0-8CBC9DEF51B1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BE00D062-4FC7-4C1F-BBD0-8CBC9DEF51B1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BE00D062-4FC7-4C1F-BBD0-8CBC9DEF51B1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BE00D062-4FC7-4C1F-BBD0-8CBC9DEF51B1}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -5,13 +5,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Remove="Migrations\20191002140139_Migration_2.cs" />
-    <Compile Remove="Migrations\20191002140139_Migration_2.Designer.cs" />
-    <Compile Remove="Migrations\20191002141442_user.cs" />
-    <Compile Remove="Migrations\20191002141442_user.Designer.cs" />
-  </ItemGroup>
-
-  <ItemGroup>
 	<FrameworkReference Include="Microsoft.AspNetCore.App" />
     <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="3.1.0" />
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="3.1.0" />
@@ -20,6 +13,10 @@
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\FavourPal.Domain\FavourPal.Domain.csproj" />
   </ItemGroup>
 
 </Project>

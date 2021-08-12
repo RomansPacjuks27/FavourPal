@@ -4,7 +4,7 @@ using System.Text;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace FavourPal.Api.Models
+namespace FavourPal.Domain.Models
 {
     [Table("Requests", Schema = "dbo")]
     public class Request

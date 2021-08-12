@@ -1,11 +1,11 @@
-﻿using FavourPal.Api.Models;
+﻿using FavourPal.Domain.Models;
 using Microsoft.AspNetCore.Identity;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace FavourPal.Api.Models
+namespace FavourPal.Domain.Models
 {
     [Table("Users", Schema = "dbo")]
     public class User : IdentityUser

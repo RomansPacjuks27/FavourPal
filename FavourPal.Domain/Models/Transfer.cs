@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Text;
-using FavourPal.Api.Models;
+using FavourPal.Domain.Models;
 
-namespace FavourPal.Api.Models
+namespace FavourPal.Domain.Models
 {
     [Table("Transfers", Schema = "dbo")]
     public class Transfer

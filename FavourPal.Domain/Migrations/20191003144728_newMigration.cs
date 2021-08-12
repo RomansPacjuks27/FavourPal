@@ -1,7 +1,7 @@
 ﻿using System;
 using Microsoft.EntityFrameworkCore.Migrations;
 
-namespace FavourPal.Api.Migrations
+namespace FavourPal.Domain.Migrations
 {
     public partial class newMigration : Migration
     {

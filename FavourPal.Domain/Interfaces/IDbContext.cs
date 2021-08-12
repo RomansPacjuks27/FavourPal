@@ -7,7 +7,7 @@ using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace FavourPal.Api.Interfaces
+namespace FavourPal.Domain.Interfaces
 {
     public interface IDbContext : IDisposable
     {

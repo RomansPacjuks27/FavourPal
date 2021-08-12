@@ -4,10 +4,10 @@ using System.Collections.Generic;
 using System.Text;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
-using FavourPal.Api.Interfaces;
+using FavourPal.Domain.Interfaces;
 using System.Linq;
 
-namespace FavourPal.Api.Models
+namespace FavourPal.Domain.Models
 {
     public class FavourPalDbContext : IdentityDbContext, IFavourPalDbContext
     {
