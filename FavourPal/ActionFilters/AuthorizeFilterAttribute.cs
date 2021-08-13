@@ -6,8 +6,8 @@ using System.Linq;
 using Microsoft.AspNetCore.Authorization;
 using System.Security.Claims;
 using Microsoft.Extensions.DependencyInjection;
-using FavourPal.Api.Interfaces;
-using FavourPal.Api.Models;
+using FavourPal.Domain.Interfaces;
+using FavourPal.Domain.Models;
 
 namespace FavourPal.ActionFilter
 {

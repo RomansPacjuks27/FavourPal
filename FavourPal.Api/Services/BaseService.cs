@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
-using FavourPal.Api.Interfaces;
-using FavourPal.Api.Models;
+using FavourPal.Domain.Interfaces;
+using FavourPal.Domain.Models;
 
 namespace FavourPal.Api.Services
 {

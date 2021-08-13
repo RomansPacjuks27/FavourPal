@@ -1,5 +1,5 @@
-﻿using FavourPal.Api.Interfaces;
-using FavourPal.Api.Models;
+﻿using FavourPal.Domain.Interfaces;
+using FavourPal.Domain.Models;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;

@@ -1,6 +1,6 @@
 ﻿using FavourPal.ActionFilter;
-using FavourPal.Api.Interfaces;
-using FavourPal.Api.Models;
+using FavourPal.Domain.Interfaces;
+using FavourPal.Domain.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System;

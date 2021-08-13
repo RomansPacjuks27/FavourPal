@@ -3,8 +3,8 @@ using System.Linq;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using FavourPal.Models;
-using FavourPal.Api.Models;
-using FavourPal.Api.Interfaces;
+using FavourPal.Domain.Models;
+using FavourPal.Domain.Interfaces;
 using AutoMapper;
 
 namespace FavourPal.Controllers

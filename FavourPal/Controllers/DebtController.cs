@@ -4,7 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using FavourPal.Models;
-using FavourPal.Api.Models;
+using FavourPal.Domain.Models;
 using Microsoft.AspNetCore.Authorization;
 
 namespace FavourPal.Controllers
